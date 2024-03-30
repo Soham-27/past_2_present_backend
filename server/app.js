@@ -10,7 +10,7 @@ import bodyParser from "body-parser";
 
 
 const app=express();
-const port=process.env.PORT_2; 
+const port=3000||process.env.PORT_2; 
 app.use(bodyParser.json()); // Parse JSON bodies
 app.use(bodyParser.urlencoded({ extended: true })); // Parse U  
 
