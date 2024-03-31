@@ -1,6 +1,6 @@
 import pg from "pg";
 const {Client}=pg;
-const string ="postgres://india:wFvuADVTXlLtL0AD7ENLfTI26MewuEeN@dpg-co40ibq1hbls73bnlt10-a.oregon-postgres.render.com/past2present"||process.env.STRIN;
+const string ="postgres://india:wFvuADVTXlLtL0AD7ENLfTI26MewuEeN@dpg-co40ibq1hbls73bnlt10-a.oregon-postgres.render.com/past2present"
 const db=new pg.Client({
     // user:"postgres",
     // host:"localhost",

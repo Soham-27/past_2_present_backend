@@ -17,11 +17,10 @@ app.use(bodyParser.urlencoded({ extended: true })); // Parse U
 
  
 app.use("/user",userrouter);
-
 app.get("/",async(req,res)=>{
     res.json("hello from");
     console.log("yo")
 })
 app.listen(port,()=>{
     console.log(`server is running on ${port}`);
-});  
+});
