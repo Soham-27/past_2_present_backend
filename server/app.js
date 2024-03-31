@@ -5,7 +5,7 @@ import { db } from "./models/db.js";
 import { userrouter } from "./routes/user_routes.js";
 import bodyParser from "body-parser";
 
-
+ 
 
 
 
@@ -19,9 +19,7 @@ app.use(bodyParser.urlencoded({ extended: true })); // Parse U
 app.use("/user",userrouter);
 
 app.get("/",async(req,res)=>{
-    const result=await db.query("select * from items");
-    console.log(result.rows);
-    res.json(result.rows);
+    res.json("hello from");
     console.log("yo")
 })
 app.listen(port,()=>{
