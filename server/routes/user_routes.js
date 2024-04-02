@@ -1,10 +1,11 @@
 import { Router } from "express";
 import { SignUp,UserLogin,logout} from "../controllers/user_controllers.js";
-import { AddItem } from "../controllers/items_controller.js";
+import { AddItem, MyUploadedItems } from "../controllers/items_controller.js";
+import { isUserAuthenticated } from "../middleware/user_middleware.js";
 const userrouter=Router();
 userrouter.post("/signup",SignUp);
-// userrouter.post("/register",register);
 userrouter.post("/login",UserLogin);
-userrouter.post("/additem",AddItem);
+userrouter.post("/additem",isUserAuthenticated,AddItem);
 userrouter.delete("/logout",logout);
+userrouter.get("/myitems",isUserAuthenticated,MyUploadedItems);
 export{userrouter};   

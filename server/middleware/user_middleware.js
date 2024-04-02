@@ -1,6 +1,6 @@
-import jwt from 'jsonwebtoken';
+// import jwt from 'jsonwebtoken';
 import { db } from "./../models/db.js";  
-
+import jwt from 'jsonwebtoken';
 export const isUserAuthenticated = async (req, res, next) => {
     try {
         const authHeader = req.header("Authorization");
@@ -28,8 +28,6 @@ export const isUserAuthenticated = async (req, res, next) => {
         }
         
         req.user = userResult.rows[0];
-        console.log(req.user);
-        console.log(req.user.fk_user);
         req.token = token;
         next();
     } catch (error) {
@@ -38,6 +36,21 @@ export const isUserAuthenticated = async (req, res, next) => {
     }
 };
 
+// export const generateUserToken = async (user_id) => {
+//     try {
+//         const timeStamp = new Date();
+//         const key = process.env.TOKEN_SECRET || 'default_secret_key';
+//         const token = jwt.sign({ id: user_id }, key, { expiresIn: '24h' });
+        
+//         const tokenRecordQuery = "INSERT INTO user_token (fk_user, token, created_at, updated_at) VALUES ($1, $2, $3, $4)";
+//         const tokenParams = [user_id, token, timeStamp, timeStamp];
+//         await db.query(tokenRecordQuery, tokenParams);
+//         return token;
+//     } catch (err) {
+//         console.error("Error in token generation:", err);
+//         throw err; // Ensure that errors are propagated
+//     }
+// };
 export const generateUserToken = async (user_id) => {
     try {
         const timeStamp = new Date();
@@ -47,10 +60,10 @@ export const generateUserToken = async (user_id) => {
         const tokenRecordQuery = "INSERT INTO user_token (fk_user, token, created_at, updated_at) VALUES ($1, $2, $3, $4)";
         const tokenParams = [user_id, token, timeStamp, timeStamp];
         await db.query(tokenRecordQuery, tokenParams);
-        console.log(token);
+        console.log("Token generated:", token); // Add this line for debugging
         return token;
     } catch (err) {
         console.error("Error in token generation:", err);
-        throw err;
+        throw err; // Ensure that errors are propagated
     }
 };

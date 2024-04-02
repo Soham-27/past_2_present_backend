@@ -34,12 +34,12 @@ try {
 //     }
 //     db.end();
 // }); 
-const read_query="select * from user_token";
-const result=await db.query(read_query);
-console.log(result.rows);
-const read_query_1="select * from items";
-const result_1=await db.query(read_query_1);
-console.log(result_1.rows);
+// const read_query="select * from user_token";
+// const result=await db.query(read_query);
+// console.log(result.rows);
+// const read_query_1="select * from items";
+// const result_1=await db.query(read_query_1);
+// console.log(result_1.rows);
  
 
 
