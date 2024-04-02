@@ -4,6 +4,7 @@ dotenv.config({path:"../config/.env"});
 import { db } from "./models/db.js";
 import { userrouter } from "./routes/user_routes.js";
 import bodyParser from "body-parser";
+import { isUserAuthenticated } from "./middleware/user_middleware.js";
 
  
 
@@ -20,7 +21,8 @@ app.use("/user",userrouter);
 app.get("/",async(req,res)=>{
     res.json("hello from");
     console.log("yo")
+    console.log(isUserAuthenticated);
 })
-app.listen(port,()=>{
+app.listen(port,()=>{ 
     console.log(`server is running on ${port}`);
 });

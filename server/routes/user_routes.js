@@ -1,7 +1,10 @@
 import { Router } from "express";
-import { SignUp,UserLogin} from "../controllers/user_controllers.js";
+import { SignUp,UserLogin,logout} from "../controllers/user_controllers.js";
+import { AddItem } from "../controllers/items_controller.js";
 const userrouter=Router();
 userrouter.post("/signup",SignUp);
 // userrouter.post("/register",register);
 userrouter.post("/login",UserLogin);
-export{userrouter};
+userrouter.post("/additem",AddItem);
+userrouter.delete("/logout",logout);
+export{userrouter};   
