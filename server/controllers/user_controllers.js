@@ -61,6 +61,40 @@ export const SignUp = async (req, res) => {
 };
 
 
+// export const UserLogin = async (req, res) => {
+//     const { email, user_password } = req.body;
+
+//     try {
+//         const query = "SELECT * FROM users WHERE email = $1";
+//         const params = [email];
+//         const result = await db.query(query, params);
+
+//         if (result.rows.length === 0) {
+//             return res.status(404).json({ error: "User not found" });
+//         }
+
+//         const user = result.rows[0];
+//         const hashedPassword = user.user_password;
+
+//         bcrypt.compare(user_password, hashedPassword, (err, result) => {
+//             if (err) {
+//                 return res.status(500).json({ error: "Error in bcrypt" });
+//             }
+
+//             if (result) {
+//                 const token = generateUserToken(user.user_id);
+//                 delete user.user_password;
+//                 return res.status(200).json({ token: token, user: user,message:"logined successfully!!" });
+//             } else {
+//                 return res.status(400).json({ error: "Incorrect password" });
+//             }
+//         });
+//     } catch (error) {
+//         console.error("Error in user login:", error);
+    
+//         res.status(500).json({ error: "An error occurred during user login" });
+//     }
+// };
 export const UserLogin = async (req, res) => {
     const { email, user_password } = req.body;
 
@@ -76,25 +110,30 @@ export const UserLogin = async (req, res) => {
         const user = result.rows[0];
         const hashedPassword = user.user_password;
 
-        bcrypt.compare(user_password, hashedPassword, (err, result) => {
+        bcrypt.compare(user_password, hashedPassword, async (err, result) => {
             if (err) {
                 return res.status(500).json({ error: "Error in bcrypt" });
             }
 
             if (result) {
-                const token = generateUserToken(user.user_id);
-                delete user.user_password;
-                return res.status(200).json({ token: token, user: user,message:"logined successfully!!" });
+                try {
+                    const token = await generateUserToken(user.user_id); // Ensure to await token generation
+                    delete user.user_password;
+                    return res.status(200).json({ token: token, user: user, message: "Logged in successfully" }); // Include the token in the response
+                } catch (tokenError) {
+                    console.error("Error in token generation:", tokenError);
+                    return res.status(500).json({ error: "An error occurred during token generation" });
+                }
             } else {
                 return res.status(400).json({ error: "Incorrect password" });
             }
         });
     } catch (error) {
         console.error("Error in user login:", error);
-    
         res.status(500).json({ error: "An error occurred during user login" });
     }
 };
+
 
 export const logout = async (req, res) => {
     try {
