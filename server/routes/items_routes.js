@@ -5,6 +5,6 @@ const itemrouter=Router();
 
 itemrouter.get("/",GetAllItems);
 itemrouter.get("/:name",GetItemsWithCategory);
-itemrouter.get("/:id",GetItemWithId);
+itemrouter.get("/items/:id",GetItemWithId);
 
 export{itemrouter};

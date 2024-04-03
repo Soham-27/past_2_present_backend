@@ -7,7 +7,7 @@ import bodyParser from "body-parser";
 import { isUserAuthenticated } from "./middleware/user_middleware.js";
 import { itemrouter } from "./routes/items_routes.js";
 import { profilerouter } from "./routes/profile_routes.js";
-
+app.use(cors());
  
 
 

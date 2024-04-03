@@ -80,13 +80,7 @@ import {db} from "../models/db.js";
     const GetItemWithId=async(req,res)=>{
         try {
             const item_id=req.params.item_id;
-            const query = `
-            SELECT items.item_id, items.item_name, items.price, items.years_used,
-                   users.user_name, users.phone_no 
-            FROM users 
-            LEFT JOIN items ON items.fk_user_id = users.user_id 
-            WHERE items.item_id = $1;
-        `;
+            const query = "SELECT items.item_id, items.item_name, items.price, items.years_used FROM items WHERE items.item_id = $1;";
             const params = [item_id];
             const result = await db.query(query,params);
             if(result.rows.length==0){
