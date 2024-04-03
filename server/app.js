@@ -25,7 +25,7 @@ app.use("/user",userrouter);
 app.use("/items",itemrouter); 
 app.get("/",async(req,res)=>{
     res.json("hello from");
-    console.log("yo")
+    console.log("yo") 
     console.log(isUserAuthenticated);
 })
 app.listen(port,()=>{ 

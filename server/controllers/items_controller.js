@@ -80,14 +80,28 @@ import {db} from "../models/db.js";
     const GetItemWithId=async(req,res)=>{
         try {
             const item_id=req.params.item_id;
-            const query = "SELECT items.item_id, items.item_name, items.price, items.years_used FROM items WHERE items.item_id = $1;";
-            const params = [item_id];
-            const result = await db.query(query,params);
-            if(result.rows.length==0){
+            console.log(item_id);
+            const query_1 =`SELECT 
+            i.item_name,
+            i.price,
+            i.years_used,
+            i.item_message,
+            u.user_name,
+            u.phone_no
+        FROM 
+            items i
+        JOIN 
+            users u ON i.fk_user_id = u.user_id
+        WHERE 
+            i.item_id = $1;
+        `;
+            const params_1 = [item_id];
+            const result_1 = await db.query(query_1,params_1);
+            if(result_1.rows.length==0){
                 return res.status(404).json({ error: "Item not found" });
             }
-            console.log(result.rows);
-            res.status(200).json(result.rows);
+            console.log(result_1.rows);
+            res.status(200).json(result_1.rows);
         } catch (error) {
             console.log(error);
             res.status(500).json({ error: "error while getting info about item" });
