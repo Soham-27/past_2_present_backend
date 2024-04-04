@@ -28,13 +28,35 @@ import {db} from "../models/db.js";
             res.status(500).json({ error: "An error occurred during adding item" });
         }
     };
-    const DeleteItem=async(req,res)=>{
+    const DeleteItem = async (req, res) => {
         try {
-            
+            // Extract item ID from request parameters or body
+            const itemId = req.params.itemId;
+            const user_id = req.user.user_id;
+    
+            // Check if item ID is provided
+            if (!itemId) {
+                return res.status(400).json({ error: "Item ID is required" });
+            }
+    
+            // Perform the delete operation
+            const query = "DELETE FROM items WHERE item_id = $1 AND fk_user_id = $2";
+            const params = [itemId, user_id];
+            const result = await db.query(query, params);
+    
+            // Check if any row is affected
+            if (result.rowCount === 0) {
+                return res.status(404).json({ error: "Item not found" });
+            }
+    
+            // Respond with success message
+            res.status(200).json({ message: "Item deleted successfully" });
         } catch (error) {
-            
+            console.log(error);
+            res.status(500).json({ error: "An error occurred during deleting item" });
         }
     };
+    
     const GetAllItems=async(req,res)=>{
         try {
             const query="SELECT * FROM items";
@@ -87,7 +109,8 @@ import {db} from "../models/db.js";
             i.years_used,
             i.item_message,
             u.user_name,
-            u.phone_no
+            u.phone_no,
+            u.email
         FROM 
             items i
         JOIN 
