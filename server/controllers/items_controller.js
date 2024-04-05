@@ -123,7 +123,7 @@ import {db} from "../models/db.js";
             if(result_1.rows.length==0){
                 return res.status(404).json({ error: "Item not found" });
             }
-            console.log(result_1.rows);
+            console.log(result_1.rows); 
             res.status(200).json(result_1.rows);
         } catch (error) {
             console.log(error);
@@ -138,6 +138,6 @@ export{AddItem,DeleteItem,GetAllItems,GetItemsWithCategory,MyUploadedItems,GetIt
 
 
 
-
+ 
 
 

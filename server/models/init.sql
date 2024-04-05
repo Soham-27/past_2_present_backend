@@ -25,12 +25,6 @@ create table admins(
     password text,
     created_at timestamp
 );
-create table reports(
-    report_id bigserial primary key,
-    user_id int,
-    reason text,
-    sent_at timestamp
-);
 create table user_token(
     user_token_id SERIAL NOT NULL primary KEY,
     fk_user int,
@@ -38,4 +32,11 @@ create table user_token(
     created_at timestamp,
     updated_at timestamp,
     constraint fk_user FOREIGN KEY(fk_user) references users(user_id) ON DELETE CASCADE ON UPDATE CASCADE
+);
+create table reports(
+    report_id serial primary key,
+    reason text,
+    fk_item_id int,
+    sent_at timestamp,
+    constraint fk_item_id FOREIGN KEY (fk_item_id) references items(item_id) ON DELETE CASCADE ON UPDATE CASCADE
 );

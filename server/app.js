@@ -13,7 +13,7 @@ import { yourCronJobFunction } from "./cronjob/cron_job_file.js";
 cron.schedule('30 */1 * * *', () => {
     // This runs your cron job function every hour starting from 10:30 PM IST
     yourCronJobFunction();
-  });
+    });
  
 
 

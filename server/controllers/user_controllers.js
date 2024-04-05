@@ -151,4 +151,22 @@ export const logout = async (req, res) => {
         console.error("Error in logout:", error);
         res.status(500).json({ error: "An error occurred during logout" });
     }
-};     
+};
+export const ReportItem=async(req,res)=>{
+    try {
+        const item_id=req.params.item_id;
+        const reason=req.body.reason;
+        if(item_id && reason){
+            const query="INSERT INTO reports (reason,fk_item_id,sent_at) values($1,$2,$3)";
+            const params=[reason,item_id,new Date()];
+            await db.query(query,params);
+            return res.status(200).json({message:"reported successfully"});
+        }
+        else{
+            return res.status(400).json({message:"error in reporting"});
+        }
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({message:"internal error"});
+    }
+}
