@@ -3,7 +3,7 @@ create table items(
     item_name text,
     price float,
     years_used float,
-    item_message text,x
+    item_message text,
     fk_user_id int,
     uploaded_at Date,
     constraint fk_user_id FOREIGN KEY(fk_user_id) references users(user_id) ON DELETE CASCADE ON UPDATE CASCADE

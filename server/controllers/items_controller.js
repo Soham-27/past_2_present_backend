@@ -130,6 +130,7 @@ import {db} from "../models/db.js";
             res.status(500).json({ error: "error while getting info about item" });
         }
     }
+    
 export{AddItem,DeleteItem,GetAllItems,GetItemsWithCategory,MyUploadedItems,GetItemWithId};
 
 

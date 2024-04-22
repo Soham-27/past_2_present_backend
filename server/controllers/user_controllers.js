@@ -155,7 +155,7 @@ export const logout = async (req, res) => {
 export const ReportItem=async(req,res)=>{
     try {
         const item_id=req.params.item_id;
-        const reason=req.body.reason;
+        const reason=req.body;
         if(item_id && reason){
             const query="INSERT INTO reports (reason,fk_item_id,sent_at) values($1,$2,$3)";
             const params=[reason,item_id,new Date()];
