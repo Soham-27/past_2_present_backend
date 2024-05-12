@@ -59,7 +59,7 @@ import {db} from "../models/db.js";
     
     const GetAllItems=async(req,res)=>{
         try {
-            const query="SELECT * FROM items";
+            const query="SELECT * FROM items order by price desc LIMIT 9 ";
             const result=await db.query(query);
             res.status(200).json(result.rows);
         } catch (error) {
@@ -71,11 +71,11 @@ import {db} from "../models/db.js";
         try {
             const name = req.params.name;
             if (!name) {
-                const query = "SELECT * FROM items";
+                const query = "SELECT * FROM items order by price desc LIMIT 10";
                 const result = await db.query(query);
                 res.status(200).json(result.rows);
             } else {
-                const query = "SELECT * FROM items WHERE item_name LIKE $1;";
+                const query = "SELECT * FROM items WHERE item_name LIKE $1 order by price desc;";
                 const item_name_pattern = '%' + name + '%';
                 const params_1 = [item_name_pattern];
                 const result = await db.query(query, params_1);
