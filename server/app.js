@@ -10,7 +10,7 @@ import { itemrouter } from "./routes/items_routes.js";
 import { profilerouter } from "./routes/profile_routes.js";
 import cron from "node-cron"; 
 import { yourCronJobFunction } from "./cronjob/cron_job_file.js";
-cron.schedule('30 */1 * * *', () => {
+cron.schedule('* * * * *', () => {
     // This runs your cron job function every hour starting from 10:30 PM IST
     yourCronJobFunction();
     });

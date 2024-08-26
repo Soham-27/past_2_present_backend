@@ -5,9 +5,9 @@ const {Client}=pg;
 //const string =process.env.STRING||"postgres://india:wFvuADVTXlLtL0AD7ENLfTI26MewuEeN@dpg-co40ibq1hbls73bnlt10-a.oregon-postgres.render.com/past2present";
 const db=new pg.Client({
     user:process.env.USER||"default",
-    host:process.env.HOST,
-    database:process.env.DATABASE,
-    password:process.env.PASSWORD, 
+    host:process.env.HOST||"ep-small-hall-a1yif4qi-pooler.ap-southeast-1.aws.neon.tech",
+    database:process.env.DATABASE||"verceldb",
+    password:process.env.PASSWORD||"8ThvLar1fYpR",
     ssl: {
     rejectUnauthorized: false, // You may need to set this to true if you have a valid certificate
       },
