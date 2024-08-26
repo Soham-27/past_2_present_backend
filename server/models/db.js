@@ -16,7 +16,7 @@ try {
     // Connect to the database using the connect method
     db.connect()
         .then(() => {
-            console.log("Database connected!!");
+            console.log("Database connected!!!");
         })
         .catch((error) => {
             console.error("Error connecting to the database:", error);
